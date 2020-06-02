@@ -11,12 +11,21 @@ public class Checklist {
     private boolean night_check;
     private String comment;
     private String crew_member;
+    private String pressure;
+
 
     public Checklist(){
 
     }
 
-    public Checklist(int id_log_day, String log_day, String element_name, int quantity, String element_group, boolean day_check, boolean night_check, String comment, String crew_member) {
+    public Checklist(int quantity, boolean day_check, boolean night_check, String comment) {
+        this.quantity = quantity;
+        this.day_check = day_check;
+        this.night_check = night_check;
+        this.comment = comment;
+    }
+
+    public Checklist(int id_log_day, String log_day, String element_name, int quantity, String element_group, boolean day_check, boolean night_check, String comment, String crew_member, String pressure) {
         this.id_log_day = id_log_day;
         this.log_day = log_day;
         this.element_name = element_name;
@@ -26,6 +35,7 @@ public class Checklist {
         this.night_check = night_check;
         this.comment = comment;
         this.crew_member = crew_member;
+        this.pressure = pressure;
     }
 
     public int getId_log_day() {
@@ -98,5 +108,13 @@ public class Checklist {
 
     public void setCrew_member(String crew_member) {
         this.crew_member = crew_member;
+    }
+
+    public String getPressure() {
+        return pressure;
+    }
+
+    public void setPressure(String pressure) {
+        this.pressure = pressure;
     }
 }

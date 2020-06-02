@@ -4,10 +4,7 @@ package ee.aviationgroup.checklist.controller;
 import ee.aviationgroup.checklist.model.Checklist;
 import ee.aviationgroup.checklist.repository.ChecklistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +20,14 @@ public class ChecklistController {
     public List<Checklist> getAllChecklists(){
         return checklistRepository.getAllChecklists();
     }
+
+    @PostMapping("/add")
+    public void addChecklist(@RequestBody Checklist checklist) {
+        checklistRepository.addChecklist(checklist);
+    }
+//    @PostMapping("/add")
+//    public int addCompany(@RequestBody Company company) {
+//        return companiesService.addCompany(company);
+//    }
 
 }
