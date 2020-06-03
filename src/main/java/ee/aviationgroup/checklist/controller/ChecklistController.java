@@ -3,6 +3,7 @@ package ee.aviationgroup.checklist.controller;
 
 import ee.aviationgroup.checklist.model.Checklist;
 import ee.aviationgroup.checklist.repository.ChecklistRepository;
+import ee.aviationgroup.checklist.repository.service.ChecklistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,8 @@ public class ChecklistController {
 
     @Autowired
     private ChecklistRepository checklistRepository;
+    @Autowired
+    ChecklistService checklistService;
 
     @GetMapping("/all")
     public List<Checklist> getAllChecklists(){
@@ -25,9 +28,9 @@ public class ChecklistController {
     public void addChecklist(@RequestBody Checklist checklist) {
         checklistRepository.addChecklist(checklist);
     }
-//    @PostMapping("/add")
-//    public int addCompany(@RequestBody Company company) {
-//        return companiesService.addCompany(company);
-//    }
+    @PostMapping("/edit")
+    public void editChecklist(@RequestBody Checklist checklist) {
+        checklistService.saveChecklist(checklist);
+    }
 
 }

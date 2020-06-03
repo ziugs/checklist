@@ -2,6 +2,7 @@ package ee.aviationgroup.checklist.model;
 
 
 public class Checklist {
+    public int checklist_id;
     private int id_log_day;
     private String log_day;
     private String element_name;
@@ -36,6 +37,14 @@ public class Checklist {
         this.comment = comment;
         this.crew_member = crew_member;
         this.pressure = pressure;
+    }
+
+    public int getChecklist_id() {
+        return checklist_id;
+    }
+
+    public void setChecklist_id(int checklist_id) {
+        this.checklist_id = checklist_id;
     }
 
     public int getId_log_day() {
