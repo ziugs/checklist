@@ -2,13 +2,16 @@ package ee.aviationgroup.checklist.model;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Checklist {
     private int id_log_day;
     private String crew_member;
     private String log_day;
-    private List<ChecklistElements> checklistElementsList;
+    private List<ChecklistElements> checklistElementsList = new ArrayList<>();
+
+    ChecklistElements checklistElements = new ChecklistElements();
 
     public Checklist() {
     }
@@ -44,7 +47,9 @@ public class Checklist {
         this.log_day = log_day;
     }
 
+
     public List<ChecklistElements> getChecklistElementsList() {
+        //checklistElementsList.add(checklistElements);
         return checklistElementsList;
     }
 

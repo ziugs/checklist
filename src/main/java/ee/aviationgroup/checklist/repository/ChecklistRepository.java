@@ -64,6 +64,19 @@ public class ChecklistRepository {
                 checklist.getLog_day(), checklist.getCrew_member());
     }
 
+    public void addChecklistItem(ChecklistElements item, int checklistId) {
+        jdbcTemplate.update(
+                "insert into checklist_element (checklist_id, element_name, quantity, element_group, day_check, night_check, comment, pressure) values (?, ?, ?, ?, ?, ?, ?, ?)",
+                checklistId, item.getElement_name(), item.getQuantity(), item.getElement_group(), item.isDay_check(), item.isNight_check(),
+                item.getComment(), item.getPressure());
+    }
+    public void updateChecklisItem(ChecklistElements item, int checklistId) {
+        jdbcTemplate.update(
+                "update checklist_element set checklist_id = ?, element_name = ?, quantity = ?, element_group = ?, day_check = ?, night_check = ?, comment = ?, pressure = ? where checklist_id = ?",
+                checklistId, item.getElement_name(), item.getQuantity(), item.getElement_group(), item.isDay_check(), item.isNight_check(),
+                item.getComment(), item.getPressure(), checklistId
+        );
+    }
 
 
     public boolean checklistExists(Checklist checklist) {
@@ -71,7 +84,7 @@ public class ChecklistRepository {
         return count != null && count > 0;
     }
 
-        public Checklist getChecklistByDay(String checklistDay) {
+    public Checklist getChecklistByDay(String checklistDay) {
         List<Checklist> checklists = jdbcTemplate.query("select * from checklist where `log_day` = ?",
                 new Object[]{checklistDay},
                 (row, number) -> {
@@ -84,6 +97,7 @@ public class ChecklistRepository {
                 });
         return checklists.size() > 0 ? checklists.get(0) : null;
     }
+
 
 //    public List<ChecklistElements> getChecklistsByDay(String checklistDay) {
 //        List<ChecklistElements> checklists = jdbcTemplate.query("select * from checklist where `log_day` like ?",

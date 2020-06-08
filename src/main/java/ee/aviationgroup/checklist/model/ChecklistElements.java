@@ -10,7 +10,6 @@ public class ChecklistElements {
     private boolean day_check;
     private boolean night_check;
     private String comment;
-
     private String pressure;
 
     public ChecklistElements(){

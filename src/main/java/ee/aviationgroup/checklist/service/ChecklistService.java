@@ -4,67 +4,67 @@ import ee.aviationgroup.checklist.model.Checklist;
 import ee.aviationgroup.checklist.model.ChecklistElements;
 import ee.aviationgroup.checklist.repository.ChecklistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+
+import java.util.List;
 
 @Service
 public class ChecklistService {
 
     @Autowired
     ChecklistRepository checklistRepository;
+    @Autowired
+    JdbcTemplate jdbcTemplate;
+
 
     public void saveChecklist(Checklist checklist) {
 
-        if (checklistRepository.checklistExists(checklist))  {
+
+        if (checklistRepository.checklistExists(checklist)) {
             // Update...
             checklistRepository.updateChecklist(checklist);
+            //updateChecklistItems(checklist.getChecklistElementsList(), savedChecklist.getId_log_day());
         } else {
             // Add...
             checklistRepository.addChecklist(checklist);
+
         }
+        Checklist savedChecklist = checklistRepository.getChecklistByDay(checklist.getLog_day());
+        addChecklistItems(checklist.getChecklistElementsList(), savedChecklist.getId_log_day());
+        updateChecklistItems(checklist.getChecklistElementsList(), savedChecklist.getId_log_day());
+
+
 
         // Selleks hetkeks siin me oleme kindlad, et eksisteerib checklist.
-        Checklist savedChecklist = checklistRepository.getChecklistByDay(checklist.getLog_day());
-
-        for (ChecklistElements checklistItem : checklist.getChecklistElementsList()) {
-            // küsi, kas see item on juba olemas sellisel checklistil
-            // KUi on, siis muuda
-            // Kui ei ole, siis lisa
-            if(savedChecklist.getChecklistElementsList().isEmpty()) {
-                checklist.getChecklistElementsList().add(checklistItem);
-            } else {
-                checklist.getChecklistElementsList().remove(checklistItem);
-                checklist.getChecklistElementsList().add(checklistItem);
-                checklistRepository.updateChecklist(checklist);
-            }
-        }
-//        for (int i = checklist.getChecklistElementsList().size(); i < 0 ; i--) {
-//            if(savedChecklist.getChecklistElementsList().isEmpty()) {
-//                checklist.getChecklistElementsList().add(checklistItem);
-//            } else {
-//                checklist.getChecklistElementsList().remove(checklistItem);
-//                checklist.getChecklistElementsList().add(checklistItem);
-//                checklistRepository.updateChecklist(checklist);
-//            }
-//        }
-
-
-        //checkitem exists
-        //kontrollida log_day ja item name
-
-//        if (checklist.getLog_day() != null && checklist.getLog_day().length() > 0) {
-//            checklistRepository.updateCompany(checklist);
+//        Checklist savedChecklist = checklistRepository.getChecklistByDay(checklist.getLog_day());
+//        if (savedChecklist.getId_log_day() > 0) {
+//            checklistRepository.updateChecklist(checklist);
+//            updateChecklistItems(checklist.getChecklistElementsList(), savedChecklist.getId_log_day());
 //        } else {
-//            Assert.isTrue(!checklistRepository.checlistExists(checklist), "Checklist with the specified name already exists");
+//
 //            checklistRepository.addChecklist(checklist);
+//            addChecklistItems(checklist.getChecklistElementsList(), savedChecklist.getId_log_day());
 //        }
     }
 
-//    public int editChecklist(ChecklistElements checklist) {
-//        List<ChecklistElements> allChecklistsByDate = checklistRepository.getChecklistsByDay(checklist.getLog_day());
-//        Assert.isTrue(allChecklistsByDate.size() == 0, "Checklist with the specified name already exists!");
-//        return checklistRepository.addChecklist(checklist);
-//    }
+
+    public void addChecklistItems(List<ChecklistElements> items, int savedChecklistId) {
+        for (ChecklistElements checklistItem : items) {
+            checklistRepository.addChecklistItem(checklistItem, savedChecklistId);
+
+        }
+    }
+
+    public void updateChecklistItems(List<ChecklistElements> items, int savedChecklistId){
+        for (ChecklistElements checklistItem : items) {
+
+                checklistRepository.updateChecklisItem(checklistItem, savedChecklistId);
+
+        }
+    }
+
 }
 
 

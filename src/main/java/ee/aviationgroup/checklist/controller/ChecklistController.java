@@ -26,13 +26,19 @@ public class ChecklistController {
         return checklistRepository.getAllChecklists();
     }
 
-//    @PostMapping("/add")
-//    public void addChecklist(@RequestBody ChecklistElements checklist) {
-//        checklistRepository.addChecklist(checklist);
-//    }
+
     @PostMapping("/edit")
-    public void editChecklist(@RequestBody Checklist checklist, ChecklistElements checklistElements) {
+    public void editChecklist(@RequestBody Checklist checklist) {
         checklistService.saveChecklist(checklist);
+       //checklistService.addChecklistItems(items, savedChecklistId);
     }
+//    @PostMapping("/add")
+//    public void addChecklistItem(@RequestBody ChecklistElements checklistElements) {
+//
+//        checklistRepository.addChecklistItem(checklistElements);
+//
+//        //checklistService.addChecklistItems(items, savedChecklistId);
+//    }
+    //addChecklistItem(ChecklistElements item, int savedChecklistId)
 
 }
