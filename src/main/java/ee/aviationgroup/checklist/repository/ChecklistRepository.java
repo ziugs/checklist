@@ -67,24 +67,30 @@ public class ChecklistRepository {
 
     public void addChecklistItem(ChecklistElements item, int checklistId) {
         jdbcTemplate.update(
-                "insert into checklist_element (checklist_id, element_name, quantity, element_group, day_check, night_check, comment, pressure) values (?, ?, ?, ?, ?, ?, ?, ?)",
+                "insert into checklist_element (checklist_id, element_name, quantity, element_group, day_check, night_check, comment, pressure) values ( ?, ?, ?, ?, ?, ?, ?, ?)",
                 checklistId, item.getElement_name(), item.getQuantity(), item.getElement_group(), item.isDay_check(), item.isNight_check(),
                 item.getComment(), item.getPressure());
     }
 
+
     public void updateChecklisItem(ChecklistElements item, int checklistId) {
         jdbcTemplate.update(
-                "update checklist_element set checklist_id = ?, element_name = ?, quantity = ?, element_group = ?, day_check = ?, night_check = ?, comment = ?, pressure = ? where checklist_id = ?",
-                checklistId, item.getElement_name(), item.getQuantity(), item.getElement_group(), item.isDay_check(), item.isNight_check(),
-                item.getComment(), item.getPressure(), checklistId
+                "update checklist_element set quantity = ?, element_group = ?, day_check = ?, night_check = ?, comment = ?, pressure = ? where checklist_id = ? and element_name = ?",
+                 item.getQuantity(), item.getElement_group(), item.isDay_check(), item.isNight_check(),
+                item.getComment(), item.getPressure(), checklistId, item.getElement_name()
         );
     }
-
 
     public boolean checklistExists(Checklist checklist) {
         Integer count = jdbcTemplate.queryForObject("select count(id_log_day) from checklist where log_day = ?", new Object[]{checklist.getLog_day()}, Integer.class);
         return count != null && count > 0;
 
+    }
+
+    public boolean checklistItemExists(ChecklistElements item, int checklistId) {
+        Integer count = jdbcTemplate.queryForObject("select count(id_checklist_element) from checklist_element where checklist_id = ? and element_name = ?",
+                new Object[]{checklistId, item.getElement_name()}, Integer.class);
+        return count != null && count > 0;
     }
 
     public Checklist getChecklistByDay(String checklistDay) {

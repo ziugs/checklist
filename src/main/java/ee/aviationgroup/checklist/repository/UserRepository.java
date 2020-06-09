@@ -8,23 +8,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserRepository {
 
-//    @Autowired
-//    private JdbcTemplate jdbcTemplate;
-//
-//    public boolean userExists (String username){
-//        Integer count = jdbcTemplate.queryForObject("select count(id) from user where username = ?", new Object[] {isername})
-//    }
-//
-//}
-//
-//    @Autowired
-//    private JdbcTemplate jdbcTemplate;
-//
-//    public boolean userExists(String username) {
-//        Integer count = jdbcTemplate.queryForObject(
-//                "select count(id) from user where username = ?",
-//                new Object[]{username},
-//                Integer.class
-//        );
-//        return count != null && count > 0;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    public boolean userExists(String username) {
+        Integer count = jdbcTemplate.queryForObject("select count(id) from user where username = ?", new Object[]{username}, Integer.class);
+        return count != null && count > 0;
     }
+
+}
+
