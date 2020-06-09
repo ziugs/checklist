@@ -11,7 +11,7 @@ public class Checklist {
     private String log_day;
     private List<ChecklistElements> checklistElementsList = new ArrayList<>();
 
-    ChecklistElements checklistElements = new ChecklistElements();
+
 
     public Checklist() {
     }

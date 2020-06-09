@@ -23,6 +23,7 @@ public class ChecklistRepository {
                             row.getInt("checklist_id"),
                             row.getInt("id_log_day"),
                             row.getString("element_name"),
+                            row.getString("log_day"),
                             row.getInt("quantity"),
                             row.getString("element_group"),
                             row.getBoolean("day_check"),
@@ -70,6 +71,7 @@ public class ChecklistRepository {
                 checklistId, item.getElement_name(), item.getQuantity(), item.getElement_group(), item.isDay_check(), item.isNight_check(),
                 item.getComment(), item.getPressure());
     }
+
     public void updateChecklisItem(ChecklistElements item, int checklistId) {
         jdbcTemplate.update(
                 "update checklist_element set checklist_id = ?, element_name = ?, quantity = ?, element_group = ?, day_check = ?, night_check = ?, comment = ?, pressure = ? where checklist_id = ?",
@@ -82,6 +84,7 @@ public class ChecklistRepository {
     public boolean checklistExists(Checklist checklist) {
         Integer count = jdbcTemplate.queryForObject("select count(id_log_day) from checklist where log_day = ?", new Object[]{checklist.getLog_day()}, Integer.class);
         return count != null && count > 0;
+
     }
 
     public Checklist getChecklistByDay(String checklistDay) {

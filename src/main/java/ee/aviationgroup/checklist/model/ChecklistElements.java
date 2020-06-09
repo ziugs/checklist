@@ -5,6 +5,7 @@ public class ChecklistElements {
     public int checklist_id;
     private int id_log_day;
     private String element_name;
+    private String log_day;
     private int quantity;
     private String element_group;
     private boolean day_check;
@@ -12,14 +13,14 @@ public class ChecklistElements {
     private String comment;
     private String pressure;
 
-    public ChecklistElements(){
-
+    public ChecklistElements() {
     }
 
-    public ChecklistElements(int checklist_id, int id_log_day, String element_name, int quantity, String element_group, boolean day_check, boolean night_check, String comment, String pressure) {
+    public ChecklistElements(int checklist_id, int id_log_day, String element_name, String log_day, int quantity, String element_group, boolean day_check, boolean night_check, String comment, String pressure) {
         this.checklist_id = checklist_id;
         this.id_log_day = id_log_day;
         this.element_name = element_name;
+        this.log_day = log_day;
         this.quantity = quantity;
         this.element_group = element_group;
         this.day_check = day_check;
@@ -50,6 +51,14 @@ public class ChecklistElements {
 
     public void setElement_name(String element_name) {
         this.element_name = element_name;
+    }
+
+    public String getLog_day() {
+        return log_day;
+    }
+
+    public void setLog_day(String log_day) {
+        this.log_day = log_day;
     }
 
     public int getQuantity() {
