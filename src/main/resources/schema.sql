@@ -9,9 +9,9 @@ CREATE TABLE IF NOT EXISTS `checklist` (
 CREATE TABLE IF NOT EXISTS `checklist_element` (
   `id_checklist_element` int(11) NOT NULL AUTO_INCREMENT,
   `checklist_id` int(11) NOT NULL,
-  `element_name` varchar(50) COLLATE utf8mb4_unicode_ci NULL,
+  `element_name` varchar(500) COLLATE utf8mb4_unicode_ci NULL,
   `quantity` int(11) NOT NULL,
-  `element_group` varchar(50) COLLATE utf8mb4_unicode_ci NULL,
+  `element_group` varchar(500) COLLATE utf8mb4_unicode_ci NULL,
   `pressure` varchar(50) COLLATE utf8mb4_unicode_ci NULL,
   `day_check` tinyint(4) NOT NULL,
   `night_check` tinyint(4) NOT NULL,

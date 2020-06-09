@@ -37,7 +37,7 @@ public class ChecklistService {
     public void addOrUpdateChecklistItems(List<ChecklistElements> items, int savedChecklistId) {
         for (ChecklistElements checklistItem : items) {
             if (checklistRepository.checklistItemExists(checklistItem, savedChecklistId)) {
-                System.out.println("exist");
+
                 checklistRepository.updateChecklisItem(checklistItem, savedChecklistId);
             } else {
 
