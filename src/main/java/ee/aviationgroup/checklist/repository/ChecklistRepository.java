@@ -29,29 +29,14 @@ public class ChecklistRepository {
                             row.getBoolean("day_check"),
                             row.getBoolean("night_check"),
                             row.getString("comment"),
-                            row.getString("pressure")
+                            row.getString("pressure"),
+                            row.getBoolean("helo_a"),
+                            row.getBoolean("helo_b"),
+                            row.getBoolean("helo_c")
                     );
                 });
 
     }
-
-//    public int addChecklist(Checklist checklist) {
-//        return jdbcTemplate.update("insert into checklist_element (`checklist_id`,`id_log_day`,`quantity`, `element_name`, `quantity`, `element_group`, `day_check`, `night_check`, `comment`, `crew_member`, `pressure` ) values (?, ?, ?, ?, ?, ?)",
-//                checklist.getChecklistElementsList().get(0), checklist.getChecklistElementsList().get(1), checklist.getChecklistElementsList().get(2),
-//                checklist.getChecklistElementsList().get(3), checklist.getChecklistElementsList().get(4), checklist.getChecklistElementsList().get(5),
-//                checklist.getChecklistElementsList().get(6), checklist.getChecklistElementsList().get(7), checklist.getChecklistElementsList().get(8),
-//                checklist.getChecklistElementsList().get(9), checklist.getChecklistElementsList().get(10));
-//
-//
-//
-//    }
-
-//    public int addChecklist(ChecklistElements checklist) {
-//        return jdbcTemplate.update("insert into checklist_element (`element_name`,`checklist_id`,`quantity`, `day_check`, `night_check`, `comment`) values (?, ?, ?, ?, ?, ?)",
-//             checklist.getElement_name(),
-//                checklist.checklist_id, checklist.getQuantity(), checklist.isDay_check(), checklist.isNight_check(), checklist.getComment());
-//
-//    }
 
     public void updateChecklist(Checklist checklist) {
         jdbcTemplate.update(
@@ -67,17 +52,17 @@ public class ChecklistRepository {
 
     public void addChecklistItem(ChecklistElements item, int checklistId) {
         jdbcTemplate.update(
-                "insert into checklist_element (checklist_id, element_name, quantity, element_group, day_check, night_check, comment, pressure) values ( ?, ?, ?, ?, ?, ?, ?, ?)",
+                "insert into checklist_element (checklist_id, element_name, quantity, element_group, day_check, night_check, comment, pressure, helo_a, helo_b, helo_c) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 checklistId, item.getElement_name(), item.getQuantity(), item.getElement_group(), item.isDay_check(), item.isNight_check(),
-                item.getComment(), item.getPressure());
+                item.getComment(), item.getPressure(), item.isHelo_a(), item.isHelo_b(), item.isHelo_c());
     }
 
 
     public void updateChecklisItem(ChecklistElements item, int checklistId) {
         jdbcTemplate.update(
-                "update checklist_element set quantity = ?, element_group = ?, day_check = ?, night_check = ?, comment = ?, pressure = ? where checklist_id = ? and element_name = ?",
-                 item.getQuantity(), item.getElement_group(), item.isDay_check(), item.isNight_check(),
-                item.getComment(), item.getPressure(), checklistId, item.getElement_name()
+                "update checklist_element set quantity = ?, element_group = ?, day_check = ?, night_check = ?, comment = ?, pressure = ?, helo_a = ?, helo_b = ?, helo_c = ? where checklist_id = ? and element_name = ?",
+                item.getQuantity(), item.getElement_group(), item.isDay_check(), item.isNight_check(),
+                item.getComment(), item.getPressure(), item.isHelo_a(), item.isHelo_b(), item.isHelo_c(), checklistId, item.getElement_name()
         );
     }
 
@@ -107,26 +92,6 @@ public class ChecklistRepository {
         return checklists.size() > 0 ? checklists.get(0) : null;
     }
 
-
-//    public List<ChecklistElements> getChecklistsByDay(String checklistDay) {
-//        List<ChecklistElements> checklists = jdbcTemplate.query("select * from checklist where `log_day` like ?",
-//                new Object[]{"%" + checklistDay + "%"},
-//                (row, number) -> {
-//                    return new ChecklistElements(
-//                            row.getInt("id_log_day"),
-//                            row.getString("log_day"),
-//                            row.getString("element_name"),
-//                            row.getInt("quantity"),
-//                            row.getString("element_group"),
-//                            row.getBoolean("day_check"),
-//                            row.getBoolean("night_check"),
-//                            row.getString("comment"),
-//                            row.getString("crew_member"),
-//                            row.getString("pressure")
-//                    );
-//                });
-//        return checklists.size() > 0 ? checklists : null;
-//    }
 
 }
 

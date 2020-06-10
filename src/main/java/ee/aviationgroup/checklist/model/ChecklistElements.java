@@ -12,11 +12,14 @@ public class ChecklistElements {
     private boolean night_check;
     private String comment;
     private String pressure;
+    private boolean helo_a;
+    private boolean helo_b;
+    private boolean helo_c;
 
     public ChecklistElements() {
     }
 
-    public ChecklistElements(int checklist_id, int id_log_day, String element_name, String log_day, int quantity, String element_group, boolean day_check, boolean night_check, String comment, String pressure) {
+    public ChecklistElements(int checklist_id, int id_log_day, String element_name, String log_day, int quantity, String element_group, boolean day_check, boolean night_check, String comment, String pressure, boolean helo_a, boolean helo_b, boolean helo_c) {
         this.checklist_id = checklist_id;
         this.id_log_day = id_log_day;
         this.element_name = element_name;
@@ -27,6 +30,9 @@ public class ChecklistElements {
         this.night_check = night_check;
         this.comment = comment;
         this.pressure = pressure;
+        this.helo_a = helo_a;
+        this.helo_b = helo_b;
+        this.helo_c = helo_c;
     }
 
     public int getChecklist_id() {
@@ -107,5 +113,29 @@ public class ChecklistElements {
 
     public void setPressure(String pressure) {
         this.pressure = pressure;
+    }
+
+    public boolean isHelo_a() {
+        return helo_a;
+    }
+
+    public void setHelo_a(boolean helo_a) {
+        this.helo_a = helo_a;
+    }
+
+    public boolean isHelo_b() {
+        return helo_b;
+    }
+
+    public void setHelo_b(boolean helo_b) {
+        this.helo_b = helo_b;
+    }
+
+    public boolean isHelo_c() {
+        return helo_c;
+    }
+
+    public void setHelo_c(boolean helo_c) {
+        this.helo_c = helo_c;
     }
 }
