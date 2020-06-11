@@ -4,6 +4,7 @@ package ee.aviationgroup.checklist.model;
 public class ChecklistElements {
     public int checklist_id;
     private int id_log_day;
+    private String crew_member;
     private String element_name;
     private String log_day;
     private int quantity;
@@ -19,9 +20,10 @@ public class ChecklistElements {
     public ChecklistElements() {
     }
 
-    public ChecklistElements(int checklist_id, int id_log_day, String element_name, String log_day, int quantity, String element_group, boolean day_check, boolean night_check, String comment, String pressure, boolean helo_a, boolean helo_b, boolean helo_c) {
+    public ChecklistElements(int checklist_id, int id_log_day, String crew_member, String element_name, String log_day, int quantity, String element_group, boolean day_check, boolean night_check, String comment, String pressure, boolean helo_a, boolean helo_b, boolean helo_c) {
         this.checklist_id = checklist_id;
         this.id_log_day = id_log_day;
+        this.crew_member = crew_member;
         this.element_name = element_name;
         this.log_day = log_day;
         this.quantity = quantity;
@@ -49,6 +51,14 @@ public class ChecklistElements {
 
     public void setId_log_day(int id_log_day) {
         this.id_log_day = id_log_day;
+    }
+
+    public String getCrew_member() {
+        return crew_member;
+    }
+
+    public void setCrew_member(String crew_member) {
+        this.crew_member = crew_member;
     }
 
     public String getElement_name() {

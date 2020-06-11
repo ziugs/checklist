@@ -22,6 +22,7 @@ public class ChecklistRepository {
                     return new ChecklistElements(
                             row.getInt("checklist_id"),
                             row.getInt("id_log_day"),
+                            row.getString("crew_member"),
                             row.getString("element_name"),
                             row.getString("log_day"),
                             row.getInt("quantity"),
