@@ -1,6 +1,9 @@
-
+DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS `checklist_element`;
 DROP TABLE IF EXISTS `checklist`;
+
+
+
 
 CREATE TABLE IF NOT EXISTS `checklist` (
   `id_log_day` int(11)  NULL AUTO_INCREMENT,
@@ -32,3 +35,11 @@ ENGINE=InnoDB
 ROW_FORMAT=DYNAMIC
 AUTO_INCREMENT=5
 ;
+
+CREATE TABLE `user` (
+    `id` INT NOT NULL AUTO_INCREMENT,
+    `username` VARCHAR(190) NOT NULL,
+    `password` VARCHAR(190) NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE(username)
+);
